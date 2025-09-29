@@ -1,0 +1,19 @@
+{
+  "appSelected": {
+    "appId": "6917585435710578468",
+    "appName": "tm-agent",
+    "deviceTypes": [
+      {
+        "appAdapters": "5",
+        "deviceType": 4
+      }
+    ],
+    "enableSites": "CN",
+    "installationFree": 0,
+    "packageType": 7,
+    "projectId": "388421841222234980",
+    "projectName": "txyapi12",
+    "siteId": "CN"
+  },
+  "teamId": "2850086000535724929"
+}
