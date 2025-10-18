@@ -24,25 +24,32 @@ export class BaiduStorageApi {
             params: query_param  // 通过params配置传递查询参数
         });
 
-        let res: Map<string, Object> = new Map();
+        let res = []
         let fids = [];
         if (resp.data.data && resp.data.data instanceof Array) {
             resp.data.data.forEach(item => {
                 console.log(item)
                 if (item.list instanceof Array) {
                     let fileInfo = item.list[0];
-                    let f = {
-                        "fsid": fileInfo.fsid,
-                        "filename": fileInfo.filename
-                    }
                     fids.push(fileInfo.fsid)
-                    res.set(fileInfo.fsid, fileInfo)
                 }
             })
         }
 
-        await this.get_file(fids);
+        let file_resp = await this.get_file(fids);
 
+        if (file_resp.data && file_resp.data.list instanceof Array) {
+            file_resp.data.list.forEach(item => {
+                let file_info = {
+                    "name": item.filename,
+                    "dlink": item.dlink,
+                    "image": item.thumbs.url4, // 这里取最大尺寸的缩略图
+                    "path": item.path
+                }
+                res.push(file_info)
+            })
+        }
+   
         return res;
     }
 
